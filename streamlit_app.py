@@ -97,7 +97,7 @@ def retry_get(url, timeout=10, retries=2, backoff=1.5):
 # ---------- 캐시된 데이터 로드 함수 ----------
 
 @st.cache_data(ttl=3600)
-def load_g cbd_metadata():
+def load_g_cbd_metadata():
     # wrapper to keep function name valid in cache keys
     # Attempt to download GCBD metadata csv. If fails, raise.
     url = GCBD_METADATA_CSV
