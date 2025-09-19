@@ -1,3 +1,4 @@
+# streamlit_app.py
 """
 Streamlit 앱: 기후변화 - 해양생태계 대시보드
 작성자: ChatGPT (한국어 UI)
