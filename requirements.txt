@@ -1,9 +1,6 @@
-streamlit>=1.22
+streamlit
 pandas
 numpy
 plotly
 requests
 pytz
-python-dateutil
-xarray
-netcdf4

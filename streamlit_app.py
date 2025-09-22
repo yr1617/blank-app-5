@@ -1,17 +1,16 @@
-# streamlit_app.py
 """
-Streamlit 앱: 기후변화 - 해양생태계 대시보드
+Streamlit 앱: 역대 최악의 바다 그리고 더 최악이 될 바다.
 작성자: ChatGPT (한국어 UI)
-- 공개 데이터 우선 시도: NOAA Coral Reef Watch (ERDDAP / CSV), NOAA OISST (ERDDAP) 등
+- 공개 데이터 우선 시도: NOAA Coral Reef Watch (ERDDAP / CSV), NOAA OISST (ERDDAP), OCADS/GLODAP 등
 - 실패 시: 예시(합성/샘플) 데이터로 자동 대체 및 화면 안내
 - 한국어 UI, Pretendard 시도, 전처리(결측/형변환/중복/미래데이터 제거), 캐시(@st.cache_data), CSV 다운로드 제공
 - 데이터 표준화: date, value, group(optional)
 주의: 실제 서비스 환경에서는 netCDF/대용량 자료 처리를 위해 xarray + dask 사용을 권장합니다.
 출처(참고 URL - 코드 주석에 명시):
  - NOAA Coral Reef Watch (CRW) data resources / ERDDAP instructions:
-   https://coralreefwatch.noaa.gov/  and https://coralreefwatch.noaa.gov/instructions/Accessing_Coral_Reef_Watch_Data_via_Data_Servers_at_CoastWatch_20240403.pdf
+   https://coralreefwatch.noaa.gov/ and https://coralreefwatch.noaa.gov/instructions/Accessing_Coral_Reef_Watch_Data_via_Data_Servers_at_CoastWatch_20240403.pdf
  - NOAA OISST (Optimum Interpolation SST) / ERDDAP access:
-   https://psl.noaa.gov/data/gridded/data.noaa.oisst.v2.highres.html  and ERDDAP CSV endpoints (example): https://coastwatch.pfeg.noaa.gov/erddap/
+   https://psl.noaa.gov/data/gridded/data.noaa.oisst.v2.highres.html and ERDDAP CSV endpoints (example): https://coastwatch.pfeg.noaa.gov/erddap/
  - Ocean Carbon & Acidification (OCADS) / GLODAP general pages:
    https://www.ncei.noaa.gov/products/ocean-carbon-acidification-data-system
    https://glodap.info/
@@ -39,7 +38,7 @@ TODAY = datetime.now(LOCAL_TZ).date()
 # 폰트 파일(없으면 자동 생략)
 PRETENDARD_PATH = "/fonts/Pretendard-Bold.ttf"
 
-st.set_page_config(page_title="해양생태계 & 기후변화 대시보드", layout="wide")
+st.set_page_config(page_title="역대 최악의 바다 그리고 더 최악이 될 바다", layout="wide")
 
 # ------------------ 유틸리티 ------------------
 
@@ -267,22 +266,23 @@ try:
 except Exception:
     pass
 
-st.title("🌊 해양생태계 & 기후변화 대시보드")
+st.title("역대 최악의 바다 그리고 더 최악이 될 바다")
 st.caption("공개 데이터(우선 NOAA 계열 시도) + 사용자 입력(보고서 기반) — 한국어 UI")
 
-st.markdown("## 📌 공개 데이터 대시보드 (공식 공개 데이터 우선 시도)")
+# ------------------ 보고서 전문 섹션 ------------------
+
+st.markdown("---")
+st.header("서론 (문제 제기)")
+st.write("최근 수십년간 지구 온난화가 가속화 됨에 따라, 해수면과 해수온 역시 전세계적으로 빠르게 상승하고 있다. 특히 해수온의 상승은 바다 생태계 전체에 심각한 영향을 끼치는 핵심 요인이 되고 있다. 해수온이 상승하면 산호 백화 현상, 어류의 분포 변화, 해양 산성화 가속, 해양 먹이망 교란 등의 다양한 문제가 발생한다. 이는 결국 해양 생태계가 무너지는 결과를 초래할 수 있고 인간의 생활과도 직접적으로 연결되어 있다. 때문에 우리는 기후 변화와 해양 생태계의 변화에 민감하게 반응해야 한다.")
+st.write("하지만 많은 사람들이 이 문제에 대한 심각성을 느끼지 못하고 있기 때문에, 우리는 이 보고서를 통해 환경 문제를 해결해 나가야 할 청소년과 어른들에게 기후 변화와 해양 생태계에 대한 정보를 제공하여 기후 변화의 심각성을 인식하는데 도움을 주고 더 나아가 명확하고 실질적인 해결 방법을 제시함으로써 글을 읽은 독자가 환경을 보호하는 행동에 동참할 수 있도록 하고자 한다.")
+
+st.markdown("---")
+st.header("본론 1 (데이터 분석)")
+st.write("산호초 백화현상이란 해수 온도가 상승하거나 해양 환경이 급격히 변화할 때 산호가 공생조류를 잃어버리며 하얗게 변하는 현상을 말한다. 이는 단순한 색 변화가 아니라 산호의 생존이 위협받는 심각한 신호이다.")
+st.write("최근 2년간 전 세계 산호초의 약 80% 이상에서 백화 현상이 심화되었으며, 엘크혼 산호와 같은 주요 산호 종은 멸종 위기에 처해 있다. 산호초는 수많은 해양 생물들의 서식지이자 어업 자원의 기반이기 때문에, 산호의 붕괴는 곧 해양 생태계 전반의 균형을 무너뜨리는 결과로 이어진다. 따라서 산호초 백화현상은 단순한 자연 현상이 아닌, 기후 위기의 상징적인 사건이라 할 수 있다.")
+
+st.markdown("### 최근 45년간 산호 백화 현상 비율")
 col_left, col_right = st.columns([2, 1])
-
-with col_right:
-    st.markdown("**시도한 공개 데이터 출처(예시)**")
-    st.write("- NOAA Coral Reef Watch (CRW) — ERDDAP / 시간-위치 기반 시계열. (문서/ERDDAP 접근 권장)")
-    st.write("- NOAA OISST (Optimum Interpolation SST) — ERDDAP / netCDF 대형 시계열 (요약/월별 사용 가능)")
-    st.write("- Ocean Carbon & Acidification (OCADS) / GLODAP (pH·산성화 관련 관측)")
-    st.write("---")
-    st.markdown("**참고/권고**")
-    st.write("- 대용량 원자료(netCDF)는 xarray.open_dataset + 지역/기간 서브셋 사용 권장")
-    st.write("- 만약 Kaggle 데이터 사용 시: kaggle CLI 인증(https://www.kaggle.com/docs/api) 필요")
-
 # 공개 데이터 로드 시도
 public_result = load_public_ocean_data()
 public_data_warning = None
@@ -348,7 +348,6 @@ smoothing = st.sidebar.selectbox("스무딩(이동평균)", options=["사용 안
 
 # 메인: 산호 백화 시계열 (연별 요약)
 with col_left:
-    st.subheader("최근 산호 백화 현상 비율 (연별 요약)")
     if coral_df.empty:
         st.info("공개데이터에서 직접 산호 백화 비율 시계열을 확보하지 못했습니다. 예시/대체 데이터를 사용하거나, NOAA Coral Reef Watch에서 'virtual station' 또는 QCed 관측 파일을 ERDDAP로 추출해 보세요.")
         # create example for visualization
@@ -378,12 +377,28 @@ with col_left:
         fig.update_traces(mode="lines+markers")
         st.plotly_chart(fig, use_container_width=True)
     st.download_button("전처리된 산호백화_데이터 다운로드 (CSV)",
-                       data=viz_df.rename(columns={"value_smoothed":"value"}).to_csv(index=False).encode("utf-8"),
-                       file_name="coral_preprocessed.csv", mime="text/csv")
+                      data=viz_df.rename(columns={"value_smoothed":"value"}).to_csv(index=False).encode("utf-8"),
+                      file_name="coral_preprocessed.csv", mime="text/csv")
+with col_right:
+    st.markdown("---")
+    st.markdown("**시도한 공개 데이터 출처(예시)**")
+    st.write("- NOAA Coral Reef Watch (CRW) — ERDDAP / 시간-위치 기반 시계열. (문서/ERDDAP 접근 권장)")
+    st.write("- NOAA OISST (Optimum Interpolation SST) — ERDDAP / netCDF 대형 시계열 (요약/월별 사용 가능)")
+    st.write("- Ocean Carbon & Acidification (OCADS) / GLODAP (pH·산성화 관련 관측)")
+    st.write("---")
+    st.markdown("**참고/권고**")
+    st.write("- 대용량 원자료(netCDF)는 xarray.open_dataset + 지역/기간 서브셋 사용 권장")
+    st.write("- 만약 Kaggle 데이터 사용 시: kaggle CLI 인증(https://www.kaggle.com/docs/api) 필요")
+
+
+st.markdown("---")
+st.header("본론 2 (원인 및 영향 탐구)")
+st.write("해수 온도 상승은 산호초뿐만 아니라 다양한 해양 생물들에게 피해를 주고 있다. 고수온으로 인해 어류 폐사가 발생하고, 실제로 국내 주요 어장인 진해만에서도 해양 생태계 변화가 뚜렷이 관찰되고 있다.")
+st.write("또한 지구온난화로 인한 이산화탄소의 증가로 해양 산성화가 심화되면서 조개류와 산호류의 껍질이 손상되고, 서식지 파괴가 가속화 되고 있다. 이는 결국 해양 생물 다양성 감소로 이어지고, 인간의 어업활동과 식량 안보에도 직접적인 타격을 준다.")
+st.write("더불어 해양 열파는 장기적으로 해양 생태계 붕괴를 촉진하는 주요 원인이 되고 있으며, 산호 백화와 어류 감소 현상을 악화시키고 있다. 연구자들은 이를 막기 위해 탄소 배출 저감과 해양 보호구역 확대, 산호 복원 프로젝트와 같은 대응 전략을 제안하고 있다.")
 
 # 보조 지표: SST 및 해양 산성화 (pH)
-st.markdown("---")
-st.subheader("보조 지표: 해양 표층 수온(SST) & 표층 pH(산성화)")
+st.subheader("해양 표층 수온(SST) & 표층 pH(산성화)")
 
 col_sst, col_acid = st.columns(2)
 with col_sst:
@@ -404,7 +419,7 @@ with col_sst:
                       title="해양 표층 수온 이상치 (예시/요약)")
     st.plotly_chart(fig_sst, use_container_width=True)
     st.download_button("SST_시계열_다운로드 (CSV)", data=sst_plot.to_csv(index=False).encode("utf-8"),
-                       file_name="sst_timeseries.csv", mime="text/csv")
+                      file_name="sst_timeseries.csv", mime="text/csv")
 
 with col_acid:
     if acid_df.empty:
@@ -425,33 +440,8 @@ with col_acid:
     st.download_button("산성화_시계열_다운로드 (CSV)", data=acid_plot.to_csv(index=False).encode("utf-8"),
                        file_name="ocean_acidification_timeseries.csv", mime="text/csv")
 
-# ------------------ 사용자 입력(보고서) 기반 대시보드 (업로드 없음: 프롬프트 내 텍스트만 사용) ------------------
-st.markdown("---")
-st.header("📝 사용자 입력 기반 대시보드 (보고서 내용만 사용, 업로드 없음)")
-
-st.markdown("**보고서 원문(요약)**")
-st.write("제목(가제): 역대 최악의 바다 그리고 더 최악이 될 바다.")
-st.write("서론: 최근 수십년간 지구 온난화가 가속화됨에 따라 해수온 상승, 산호 백화, 해양 산성화 등이 해양생태계에 심각한 영향을 주고 있습니다.")
-st.write("본론 요약: 산호 백화, 고수온에 의한 어류 폐사, 해양 산성화의 악화 등 — 권고: 온실가스 감축, 해양보호구역 확대, 산호 복원, 장기 모니터링 등.")
-
-# 본론1: 최근 45년간 산호 백화 비율 (보고서용) — 상단 공개데이터(또는 예시) 사용
-st.subheader("본론 1 — 최근 45년간 산호 백화 비율 (보고서용)")
-# generate report_df from coral_df or example
-report_df = coral_df.copy()
-if report_df.empty or report_df["date"].isna().all():
-    report_df = pd.DataFrame({"date": pd.date_range(start="1980-01-01", periods=45, freq="Y"),
-                              "value": np.clip(np.linspace(5, 80, 45) + np.random.randn(45)*4, 0, 100)})
-report_df = report_df.sort_values("date").reset_index(drop=True)
-report_plot = report_df.tail(45).copy()
-fig_report = px.area(report_plot, x="date", y="value",
-                     labels={"date":"연도", "value":"산호 백화율 (임의단위)"},
-                     title="보고서용: 최근 45년 산호 백화율 (연별)")
-st.plotly_chart(fig_report, use_container_width=True)
-st.download_button("보고서_산호백화_데이터 다운로드 (CSV)", data=report_plot.to_csv(index=False).encode("utf-8"),
-                   file_name="report_coral_45y.csv", mime="text/csv")
-
 # 본론2: 해양 산성화·고수온·어류 폐사 영향 (복합 시각화)
-st.subheader("본론 2 — 해양 산성화·고수온·어류 폐사 영향 (복합 시각화)")
+st.subheader("해양 산성화·고수온·어류 폐사 영향 (복합 시각화)")
 # 병합: report_plot + sst_plot(연평균) + acid_plot(연평균)
 def to_annual(df, value_name):
     df2 = df.copy()
@@ -461,6 +451,14 @@ def to_annual(df, value_name):
     ann = df2.groupby("year").agg({value_name: "mean"}).reset_index()
     ann["date"] = pd.to_datetime(ann["year"].astype(str) + "-01-01")
     return ann[["date", value_name]]
+
+# generate report_df from coral_df or example
+report_df = coral_df.copy()
+if report_df.empty or report_df["date"].isna().all():
+    report_df = pd.DataFrame({"date": pd.date_range(start="1980-01-01", periods=45, freq="Y"),
+                              "value": np.clip(np.linspace(5, 80, 45) + np.random.randn(45)*4, 0, 100)})
+report_df = report_df.sort_values("date").reset_index(drop=True)
+report_plot = report_df.tail(45).copy()
 
 r = report_plot.rename(columns={"value":"bleaching_rate_percent"})[["date","bleaching_rate_percent"]].copy()
 sst_ann = to_annual(sst_plot.rename(columns={sst_plot.columns[1]:"sst_anomaly"}), "sst_anomaly") if not sst_plot.empty else pd.DataFrame({"date":[],"sst_anomaly":[]})
@@ -486,15 +484,22 @@ st.plotly_chart(fig_comb, use_container_width=True)
 st.download_button("본론2_복합_전처리_데이터 다운로드 (CSV)", data=merge_base.to_csv(index=False).encode("utf-8"),
                    file_name="report_combined_ocean_data.csv", mime="text/csv")
 
+
 # ------------------ 결론 / 참고자료 ------------------
 st.markdown("---")
-st.subheader("결론 및 권고 (자동 제안)")
-st.write(
-    "- 산호 백화, 해양 산성화, 고수온은 상호 연계되어 해양생태계에 심각한 영향을 줍니다.\n"
-    "- 권고: 온실가스 감축, 해양 보호구역 확대, 산호 복원, 장기 모니터링 체계 구축 등.\n"
-)
-st.markdown("**참고자료(앱에서 시도/참조한 링크)**")
-st.write("- NOAA Coral Reef Watch: https://coralreefwatch.noaa.gov/ . (CRW ERDDAP 접근 안내 문서 권장)")
+st.header("결론 (제언)")
+st.write("우리는 기후 변화에 따른 해양 생태계 위기의 심각성을 인식하고 청소년과 어른 모두 환경 보호를 위한 행동에 동참해야한다. 기후 변화를 막기 위해 우리가 할 수 있는 것에는 대중교통, 따릉이 등을 이용하는 것, 노플라스틱 한강 캠페인, 탄소 포인트제 등이 있다. ")
+st.write("대중교통을 사용하는 것은 약 4개월 동안 누적 9,300톤의 온실가스를 감축시킬 수 있다. 노플라스틱 캠페인이란 일상 생활에서 텀블러, 다회용기, 장바구니, 채식 등 일상 생활에서 할 수 있는 작은 실천을 하는 것을 말한다. 이 캠페인에 시민 500명이 참여한다면 하루 행사당 약 287kg의 탄소가 감소한다고 한다. 탄소포인트제는 에너지 사용량 절감 시 포인트, 또는 인센티브를 주는 것이다. 탄소포인트제는 참여 가구가 많을수록 감축할 수 있는 탄소의 양이 많아질 것이다. ")
+st.write("개인의 작은 실천도 모인다면 많은 탄소를 감축 할 수 있다. 이런 실천 등을 통해 지구 온난화를 늦추고 해양 생태계 파괴를 막으면 어떨까? ")
+
+
+st.markdown("---")
+st.header("참고 자료")
+st.write("- 기후 책, (그레타 툰베리)")
+st.write("- 해양산성화가 어류 및 패류 성장에 미치는 영향 연구: https://scienceon.kisti.re.kr/commons/util/originalView.do?cn=TRKO201700007458&dbt=TRKO&rn=")
+st.write("- 우리나라 주변 바다의 산성화 현황: https://scienceon.kisti.re.kr/srch/selectPORSrchArticle.do?cn=JAKO202210261284373")
+st.write("- 수산분야 기후변화 영향: https://www.nifs.go.kr/cmmn/file/climatechange_01.pdf")
+st.write("- NOAA Coral Reef Watch (CRW): https://coralreefwatch.noaa.gov/")
 st.write("- NOAA OISST (SST): https://psl.noaa.gov/data/gridded/data.noaa.oisst.v2.highres.html")
 st.write("- Ocean Carbon & Acidification (OCADS): https://www.ncei.noaa.gov/products/ocean-carbon-acidification-data-system")
 st.write("- GLODAP: https://glodap.info/")
